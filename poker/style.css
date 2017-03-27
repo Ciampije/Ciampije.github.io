@@ -4,9 +4,9 @@
 body {
     background-color: green;
 }
-h1 {
+/*h1 {
     float: none;
-}
+}*/
 
 .score {
     border: 1px solid black;
@@ -58,4 +58,33 @@ h1 {
     border: 1px solid black;
     min-height: 75px;
     min-width: 100px;
+}
+
+#console {
+    border: 1px solid black;
+    height: 350px;
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+
+}
+#console #bet-box {
+    border: 1px solid black;
+    height: 30px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+
+}
+
+#console #bet-submit{
+    border: 1px solid black;
+    height: 30px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+
 }

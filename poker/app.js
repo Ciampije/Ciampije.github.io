@@ -6,11 +6,26 @@ var card2;
 var card3;
 var card4;
 var card5;
-var card6;
+var playerCard1;
 var card7;
 var card8;
 var card9;
 var inPlay = [];
+
+var player1Money = 1000;
+var player2Money = 1000;
+
+var $player1Score = $('#player1Score');
+$player1Score.append(player1Money);
+
+var $player2Score = $('#player2Score');
+$player2Score.append(player2Money);
+
+var $prompt = $('#prompt');
+
+var $start = $('#start');
+var $river = $('#river');
+var $turn = $('#turn');
 
 var shuffle = function(){
     for (var i = 0; i < 9; i++){
@@ -18,7 +33,9 @@ var shuffle = function(){
         inPlay.push(cardNum);
     }
 }
-var setCards = function(){
+
+var startGame = function(){
+    $prompt.text('Welcome to Texas Hold Em Poker!')
     for (var i = 0; i < inPlay.length; i++){
         console.log(inPlay[i]);
         // CARD 1 ================================
@@ -345,9 +362,450 @@ var setCards = function(){
             $('#card3').css({'background-image': 'url(images/ace_of_spades.png)'})
         }
 
+        // PLAYER CARD 1 ====================================================
+
+        else if(i === 5 && inPlay[i] === 1){
+            $('#playerCard1').css({'background-image': 'url(images/2_of_diamonds.png)'})
+        }else if(i === 5 && inPlay[i] === 2){
+            $('#playerCard1').css({'background-image': 'url(images/2_of_clubs.png)'})
+        }else if(i === 5 && inPlay[i] === 3){
+            $('#playerCard1').css({'background-image': 'url(images/2_of_hearts.png)'})
+        }else if(i === 5 && inPlay[i] === 4){
+            $('#playerCard1').css({'background-image': 'url(images/2_of_spades.png)'})
+        }else if(i === 5 && inPlay[i] === 5){
+            $('#playerCard1').css({'background-image': 'url(images/3_of_diamonds.png)'})
+        }else if(i === 5 && inPlay[i] === 6){
+            $('#playerCard1').css({'background-image': 'url(images/3_of_clubs.png)'})
+        }else if(i === 5 && inPlay[i] === 7){
+            $('#playerCard1').css({'background-image': 'url(images/3_of_hearts.png)'})
+        }else if(i === 5 && inPlay[i] === 8){
+            $('#playerCard1').css({'background-image': 'url(images/3_of_spades.png)'})
+        }else if(i === 5 && inPlay[i] === 9){
+            $('#playerCard1').css({'background-image': 'url(images/4_of_diamonds.png)'})
+        }else if(i === 5 && inPlay[i] === 10){
+            $('#playerCard1').css({'background-image': 'url(images/4_of_clubs.png)'})
+        }else if(i === 5 && inPlay[i] === 11){
+            $('#playerCard1').css({'background-image': 'url(images/4_of_hearts.png)'})
+        }else if(i === 5 && inPlay[i] === 12){
+            $('#playerCard1').css({'background-image': 'url(images/4_of_spades.png)'})
+        }else if(i === 5 && inPlay[i] === 13){
+            $('#playerCard1').css({'background-image': 'url(images/5_of_diamonds.png)'})
+        }else if(i === 5 && inPlay[i] === 14){
+            $('#playerCard1').css({'background-image': 'url(images/5_of_clubs.png)'})
+        }else if(i === 5 && inPlay[i] === 15){
+            $('#playerCard1').css({'background-image': 'url(images/5_of_hearts.png)'})
+        }else if(i === 5 && inPlay[i] === 16){
+            $('#playerCard1').css({'background-image': 'url(images/5_of_spades.png)'})
+        }else if(i === 5 && inPlay[i] === 17){
+            $('#playerCard1').css({'background-image': 'url(images/6_of_diamonds.png)'})
+        }else if(i === 5 && inPlay[i] === 18){
+            $('#playerCard1').css({'background-image': 'url(images/6_of_clubs.png)'})
+        }else if(i === 5 && inPlay[i] === 19){
+            $('#playerCard1').css({'background-image': 'url(images/6_of_hearts.png)'})
+        }else if(i === 5 && inPlay[i] === 20){
+            $('#playerCard1').css({'background-image': 'url(images/6_of_spades.png)'})
+        }else if(i === 5 && inPlay[i] === 21){
+            $('#playerCard1').css({'background-image': 'url(images/7_of_diamonds.png)'})
+        }else if(i === 5 && inPlay[i] === 22){
+            $('#playerCard1').css({'background-image': 'url(images/7_of_clubs.png)'})
+        }else if(i === 5 && inPlay[i] === 23){
+            $('#playerCard1').css({'background-image': 'url(images/7_of_hearts.png)'})
+        }else if(i === 5 && inPlay[i] === 24){
+            $('#playerCard1').css({'background-image': 'url(images/7_of_spades.png)'})
+        }else if(i === 5 && inPlay[i] === 25){
+            $('#playerCard1').css({'background-image': 'url(images/8_of_diamonds.png)'})
+        }else if(i === 5 && inPlay[i] === 26){
+            $('#playerCard1').css({'background-image': 'url(images/8_of_clubs.png)'})
+        }else if(i === 5 && inPlay[i] === 27){
+            $('#playerCard1').css({'background-image': 'url(images/8_of_hearts.png)'})
+        }else if(i === 5 && inPlay[i] === 28){
+            $('#playerCard1').css({'background-image': 'url(images/8_of_spades.png)'})
+        }else if(i === 5 && inPlay[i] === 29){
+            $('#playerCard1').css({'background-image': 'url(images/9_of_diamonds.png)'})
+        }else if(i === 5 && inPlay[i] === 30){
+            $('#playerCard1').css({'background-image': 'url(images/9_of_clubs.png)'})
+        }else if(i === 5 && inPlay[i] === 31){
+            $('#playerCard1').css({'background-image': 'url(images/9_of_hearts.png)'})
+        }else if(i === 5 && inPlay[i] === 32){
+            $('#playerCard1').css({'background-image': 'url(images/9_of_spades.png)'})
+        }else if(i === 5 && inPlay[i] === 33){
+            $('#playerCard1').css({'background-image': 'url(images/10_of_diamonds.png)'})
+        }else if(i === 5 && inPlay[i] === 34){
+            $('#playerCard1').css({'background-image': 'url(images/10_of_clubs.png)'})
+        }else if(i === 5 && inPlay[i] === 35){
+            $('#playerCard1').css({'background-image': 'url(images/10_of_hearts.png)'})
+        }else if(i === 5 && inPlay[i] === 36){
+            $('#playerCard1').css({'background-image': 'url(images/10_of_spades.png)'})
+        }else if(i === 5 && inPlay[i] === 37){
+            $('#playerCard1').css({'background-image': 'url(images/jack_of_diamonds2.png)'})
+        }else if(i === 5 && inPlay[i] === 38){
+            $('#playerCard1').css({'background-image': 'url(images/jack_of_clubs2.png)'})
+        }else if(i === 5 && inPlay[i] === 39){
+            $('#playerCard1').css({'background-image': 'url(images/jack_of_hearts2.png)'})
+        }else if(i === 5 && inPlay[i] === 40){
+            $('#playerCard1').css({'background-image': 'url(images/jack_of_spades2.png)'})
+        }else if(i === 5 && inPlay[i] === 41){
+            $('#playerCard1').css({'background-image': 'url(images/queen_of_diamonds2.png)'})
+        }else if(i === 5 && inPlay[i] === 42){
+            $('#playerCard1').css({'background-image': 'url(images/queen_of_clubs2.png)'})
+        }else if(i === 5 && inPlay[i] === 43){
+            $('#playerCard1').css({'background-image': 'url(images/queen_of_hearts2.png)'})
+        }else if(i === 5 && inPlay[i] === 44){
+            $('#playerCard1').css({'background-image': 'url(images/queen_of_spades2.png)'})
+        }else if(i === 5 && inPlay[i] === 45){
+            $('#playerCard1').css({'background-image': 'url(images/king_of_diamonds2.png)'})
+        }else if(i === 5 && inPlay[i] === 46){
+            $('#playerCard1').css({'background-image': 'url(images/king_of_clubs2.png)'})
+        }else if(i === 5 && inPlay[i] === 47){
+            $('#playerCard1').css({'background-image': 'url(images/king_of_hearts2.png)'})
+        }else if(i === 5 && inPlay[i] === 48){
+            $('#playerCard1').css({'background-image': 'url(images/king_of_spades2.png)'})
+        }else if(i === 5 && inPlay[i] === 49){
+            $('#playerCard1').css({'background-image': 'url(images/ace_of_diamonds.png)'})
+        }else if(i === 5 && inPlay[i] === 50){
+            $('#playerCard1').css({'background-image': 'url(images/ace_of_clubs.png)'})
+        }else if(i === 5 && inPlay[i] === 51){
+            $('#playerCard1').css({'background-image': 'url(images/ace_of_hearts.png)'})
+        }else if(i === 5 && inPlay[i] === 52){
+            $('#playerCard1').css({'background-image': 'url(images/ace_of_spades.png)'})
+        }
+
+
+        // CARD PLAYER CARD 2 ====================================================
+
+        else if(i === 6 && inPlay[i] === 1){
+            $('#playerCard2').css({'background-image': 'url(images/2_of_diamonds.png)'})
+        }else if(i === 6 && inPlay[i] === 2){
+            $('#playerCard2').css({'background-image': 'url(images/2_of_clubs.png)'})
+        }else if(i === 6 && inPlay[i] === 3){
+            $('#playerCard2').css({'background-image': 'url(images/2_of_hearts.png)'})
+        }else if(i === 6 && inPlay[i] === 4){
+            $('#playerCard2').css({'background-image': 'url(images/2_of_spades.png)'})
+        }else if(i === 6 && inPlay[i] === 5){
+            $('#playerCard2').css({'background-image': 'url(images/3_of_diamonds.png)'})
+        }else if(i === 6 && inPlay[i] === 6){
+            $('#playerCard2').css({'background-image': 'url(images/3_of_clubs.png)'})
+        }else if(i === 6 && inPlay[i] === 7){
+            $('#playerCard2').css({'background-image': 'url(images/3_of_hearts.png)'})
+        }else if(i === 6 && inPlay[i] === 8){
+            $('#playerCard2').css({'background-image': 'url(images/3_of_spades.png)'})
+        }else if(i === 6 && inPlay[i] === 9){
+            $('#playerCard2').css({'background-image': 'url(images/4_of_diamonds.png)'})
+        }else if(i === 6 && inPlay[i] === 10){
+            $('#playerCard2').css({'background-image': 'url(images/4_of_clubs.png)'})
+        }else if(i === 6 && inPlay[i] === 11){
+            $('#playerCard2').css({'background-image': 'url(images/4_of_hearts.png)'})
+        }else if(i === 6 && inPlay[i] === 12){
+            $('#playerCard2').css({'background-image': 'url(images/4_of_spades.png)'})
+        }else if(i === 6 && inPlay[i] === 13){
+            $('#playerCard2').css({'background-image': 'url(images/5_of_diamonds.png)'})
+        }else if(i === 6 && inPlay[i] === 14){
+            $('#playerCard2').css({'background-image': 'url(images/5_of_clubs.png)'})
+        }else if(i === 6 && inPlay[i] === 15){
+            $('#playerCard2').css({'background-image': 'url(images/5_of_hearts.png)'})
+        }else if(i === 6 && inPlay[i] === 16){
+            $('#playerCard2').css({'background-image': 'url(images/5_of_spades.png)'})
+        }else if(i === 6 && inPlay[i] === 17){
+            $('#playerCard2').css({'background-image': 'url(images/6_of_diamonds.png)'})
+        }else if(i === 6 && inPlay[i] === 18){
+            $('#playerCard2').css({'background-image': 'url(images/6_of_clubs.png)'})
+        }else if(i === 6 && inPlay[i] === 19){
+            $('#playerCard2').css({'background-image': 'url(images/6_of_hearts.png)'})
+        }else if(i === 6 && inPlay[i] === 20){
+            $('#playerCard2').css({'background-image': 'url(images/6_of_spades.png)'})
+        }else if(i === 6 && inPlay[i] === 21){
+            $('#playerCard2').css({'background-image': 'url(images/7_of_diamonds.png)'})
+        }else if(i === 6 && inPlay[i] === 22){
+            $('#playerCard2').css({'background-image': 'url(images/7_of_clubs.png)'})
+        }else if(i === 6 && inPlay[i] === 23){
+            $('#playerCard2').css({'background-image': 'url(images/7_of_hearts.png)'})
+        }else if(i === 6 && inPlay[i] === 24){
+            $('#playerCard2').css({'background-image': 'url(images/7_of_spades.png)'})
+        }else if(i === 6 && inPlay[i] === 25){
+            $('#playerCard2').css({'background-image': 'url(images/8_of_diamonds.png)'})
+        }else if(i === 6 && inPlay[i] === 26){
+            $('#playerCard2').css({'background-image': 'url(images/8_of_clubs.png)'})
+        }else if(i === 6 && inPlay[i] === 27){
+            $('#playerCard2').css({'background-image': 'url(images/8_of_hearts.png)'})
+        }else if(i === 6 && inPlay[i] === 28){
+            $('#playerCard2').css({'background-image': 'url(images/8_of_spades.png)'})
+        }else if(i === 6 && inPlay[i] === 29){
+            $('#playerCard2').css({'background-image': 'url(images/9_of_diamonds.png)'})
+        }else if(i === 6 && inPlay[i] === 30){
+            $('#playerCard2').css({'background-image': 'url(images/9_of_clubs.png)'})
+        }else if(i === 6 && inPlay[i] === 31){
+            $('#playerCard2').css({'background-image': 'url(images/9_of_hearts.png)'})
+        }else if(i === 6 && inPlay[i] === 32){
+            $('#playerCard2').css({'background-image': 'url(images/9_of_spades.png)'})
+        }else if(i === 6 && inPlay[i] === 33){
+            $('#playerCard2').css({'background-image': 'url(images/10_of_diamonds.png)'})
+        }else if(i === 6 && inPlay[i] === 34){
+            $('#playerCard2').css({'background-image': 'url(images/10_of_clubs.png)'})
+        }else if(i === 6 && inPlay[i] === 35){
+            $('#playerCard2').css({'background-image': 'url(images/10_of_hearts.png)'})
+        }else if(i === 6 && inPlay[i] === 36){
+            $('#playerCard2').css({'background-image': 'url(images/10_of_spades.png)'})
+        }else if(i === 6 && inPlay[i] === 37){
+            $('#playerCard2').css({'background-image': 'url(images/jack_of_diamonds2.png)'})
+        }else if(i === 6 && inPlay[i] === 38){
+            $('#playerCard2').css({'background-image': 'url(images/jack_of_clubs2.png)'})
+        }else if(i === 6 && inPlay[i] === 39){
+            $('#playerCard2').css({'background-image': 'url(images/jack_of_hearts2.png)'})
+        }else if(i === 6 && inPlay[i] === 40){
+            $('#playerCard2').css({'background-image': 'url(images/jack_of_spades2.png)'})
+        }else if(i === 6 && inPlay[i] === 41){
+            $('#playerCard2').css({'background-image': 'url(images/queen_of_diamonds2.png)'})
+        }else if(i === 6 && inPlay[i] === 42){
+            $('#playerCard2').css({'background-image': 'url(images/queen_of_clubs2.png)'})
+        }else if(i === 6 && inPlay[i] === 43){
+            $('#playerCard2').css({'background-image': 'url(images/queen_of_hearts2.png)'})
+        }else if(i === 6 && inPlay[i] === 44){
+            $('#playerCard2').css({'background-image': 'url(images/queen_of_spades2.png)'})
+        }else if(i === 6 && inPlay[i] === 45){
+            $('#playerCard2').css({'background-image': 'url(images/king_of_diamonds2.png)'})
+        }else if(i === 6 && inPlay[i] === 46){
+            $('#playerCard2').css({'background-image': 'url(images/king_of_clubs2.png)'})
+        }else if(i === 6 && inPlay[i] === 47){
+            $('#playerCard2').css({'background-image': 'url(images/king_of_hearts2.png)'})
+        }else if(i === 6 && inPlay[i] === 48){
+            $('#playerCard2').css({'background-image': 'url(images/king_of_spades2.png)'})
+        }else if(i === 6 && inPlay[i] === 49){
+            $('#playerCard2').css({'background-image': 'url(images/ace_of_diamonds.png)'})
+        }else if(i === 6 && inPlay[i] === 50){
+            $('#playerCard2').css({'background-image': 'url(images/ace_of_clubs.png)'})
+        }else if(i === 6 && inPlay[i] === 51){
+            $('#playerCard2').css({'background-image': 'url(images/ace_of_hearts.png)'})
+        }else if(i === 6 && inPlay[i] === 52){
+            $('#playerCard2').css({'background-image': 'url(images/ace_of_spades.png)'})
+        }
+
+
+        // CARD PLAYER 2 CARD 1 ===========================================
+
+        else if(i === 7 && inPlay[i] === 1){
+            $('#player2Card1').css({'background-image': 'url(images/2_of_diamonds.png)'})
+        }else if(i === 7 && inPlay[i] === 2){
+            $('#player2Card1').css({'background-image': 'url(images/2_of_clubs.png)'})
+        }else if(i === 7 && inPlay[i] === 3){
+            $('#player2Card1').css({'background-image': 'url(images/2_of_hearts.png)'})
+        }else if(i === 7 && inPlay[i] === 4){
+            $('#player2Card1').css({'background-image': 'url(images/2_of_spades.png)'})
+        }else if(i === 7 && inPlay[i] === 5){
+            $('#player2Card1').css({'background-image': 'url(images/3_of_diamonds.png)'})
+        }else if(i === 7 && inPlay[i] === 6){
+            $('#player2Card1').css({'background-image': 'url(images/3_of_clubs.png)'})
+        }else if(i === 7 && inPlay[i] === 7){
+            $('#player2Card1').css({'background-image': 'url(images/3_of_hearts.png)'})
+        }else if(i === 7 && inPlay[i] === 8){
+            $('#player2Card1').css({'background-image': 'url(images/3_of_spades.png)'})
+        }else if(i === 7 && inPlay[i] === 9){
+            $('#player2Card1').css({'background-image': 'url(images/4_of_diamonds.png)'})
+        }else if(i === 7 && inPlay[i] === 10){
+            $('#player2Card1').css({'background-image': 'url(images/4_of_clubs.png)'})
+        }else if(i === 7 && inPlay[i] === 11){
+            $('#player2Card1').css({'background-image': 'url(images/4_of_hearts.png)'})
+        }else if(i === 7 && inPlay[i] === 12){
+            $('#player2Card1').css({'background-image': 'url(images/4_of_spades.png)'})
+        }else if(i === 7 && inPlay[i] === 13){
+            $('#player2Card1').css({'background-image': 'url(images/5_of_diamonds.png)'})
+        }else if(i === 7 && inPlay[i] === 14){
+            $('#player2Card1').css({'background-image': 'url(images/5_of_clubs.png)'})
+        }else if(i === 7 && inPlay[i] === 15){
+            $('#player2Card1').css({'background-image': 'url(images/5_of_hearts.png)'})
+        }else if(i === 7 && inPlay[i] === 16){
+            $('#player2Card1').css({'background-image': 'url(images/5_of_spades.png)'})
+        }else if(i === 7 && inPlay[i] === 17){
+            $('#player2Card1').css({'background-image': 'url(images/6_of_diamonds.png)'})
+        }else if(i === 7 && inPlay[i] === 18){
+            $('#player2Card1').css({'background-image': 'url(images/6_of_clubs.png)'})
+        }else if(i === 7 && inPlay[i] === 19){
+            $('#player2Card1').css({'background-image': 'url(images/6_of_hearts.png)'})
+        }else if(i === 7 && inPlay[i] === 20){
+            $('#player2Card1').css({'background-image': 'url(images/6_of_spades.png)'})
+        }else if(i === 7 && inPlay[i] === 21){
+            $('#player2Card1').css({'background-image': 'url(images/7_of_diamonds.png)'})
+        }else if(i === 7 && inPlay[i] === 22){
+            $('#player2Card1').css({'background-image': 'url(images/7_of_clubs.png)'})
+        }else if(i === 7 && inPlay[i] === 23){
+            $('#player2Card1').css({'background-image': 'url(images/7_of_hearts.png)'})
+        }else if(i === 7 && inPlay[i] === 24){
+            $('#player2Card1').css({'background-image': 'url(images/7_of_spades.png)'})
+        }else if(i === 7 && inPlay[i] === 25){
+            $('#player2Card1').css({'background-image': 'url(images/8_of_diamonds.png)'})
+        }else if(i === 7 && inPlay[i] === 26){
+            $('#player2Card1').css({'background-image': 'url(images/8_of_clubs.png)'})
+        }else if(i === 7 && inPlay[i] === 27){
+            $('#player2Card1').css({'background-image': 'url(images/8_of_hearts.png)'})
+        }else if(i === 7 && inPlay[i] === 28){
+            $('#player2Card1').css({'background-image': 'url(images/8_of_spades.png)'})
+        }else if(i === 7 && inPlay[i] === 29){
+            $('#player2Card1').css({'background-image': 'url(images/9_of_diamonds.png)'})
+        }else if(i === 7 && inPlay[i] === 30){
+            $('#player2Card1').css({'background-image': 'url(images/9_of_clubs.png)'})
+        }else if(i === 7 && inPlay[i] === 31){
+            $('#player2Card1').css({'background-image': 'url(images/9_of_hearts.png)'})
+        }else if(i === 7 && inPlay[i] === 32){
+            $('#player2Card1').css({'background-image': 'url(images/9_of_spades.png)'})
+        }else if(i === 7 && inPlay[i] === 33){
+            $('#player2Card1').css({'background-image': 'url(images/10_of_diamonds.png)'})
+        }else if(i === 7 && inPlay[i] === 34){
+            $('#player2Card1').css({'background-image': 'url(images/10_of_clubs.png)'})
+        }else if(i === 7 && inPlay[i] === 35){
+            $('#player2Card1').css({'background-image': 'url(images/10_of_hearts.png)'})
+        }else if(i === 7 && inPlay[i] === 36){
+            $('#player2Card1').css({'background-image': 'url(images/10_of_spades.png)'})
+        }else if(i === 7 && inPlay[i] === 37){
+            $('#player2Card1').css({'background-image': 'url(images/jack_of_diamonds2.png)'})
+        }else if(i === 7 && inPlay[i] === 38){
+            $('#player2Card1').css({'background-image': 'url(images/jack_of_clubs2.png)'})
+        }else if(i === 7 && inPlay[i] === 39){
+            $('#player2Card1').css({'background-image': 'url(images/jack_of_hearts2.png)'})
+        }else if(i === 7 && inPlay[i] === 40){
+            $('#player2Card1').css({'background-image': 'url(images/jack_of_spades2.png)'})
+        }else if(i === 7 && inPlay[i] === 41){
+            $('#player2Card1').css({'background-image': 'url(images/queen_of_diamonds2.png)'})
+        }else if(i === 7 && inPlay[i] === 42){
+            $('#player2Card1').css({'background-image': 'url(images/queen_of_clubs2.png)'})
+        }else if(i === 7 && inPlay[i] === 43){
+            $('#player2Card1').css({'background-image': 'url(images/queen_of_hearts2.png)'})
+        }else if(i === 7 && inPlay[i] === 44){
+            $('#player2Card1').css({'background-image': 'url(images/queen_of_spades2.png)'})
+        }else if(i === 7 && inPlay[i] === 45){
+            $('#player2Card1').css({'background-image': 'url(images/king_of_diamonds2.png)'})
+        }else if(i === 7 && inPlay[i] === 46){
+            $('#player2Card1').css({'background-image': 'url(images/king_of_clubs2.png)'})
+        }else if(i === 7 && inPlay[i] === 47){
+            $('#player2Card1').css({'background-image': 'url(images/king_of_hearts2.png)'})
+        }else if(i === 7 && inPlay[i] === 48){
+            $('#player2Card1').css({'background-image': 'url(images/king_of_spades2.png)'})
+        }else if(i === 7 && inPlay[i] === 49){
+            $('#player2Card1').css({'background-image': 'url(images/ace_of_diamonds.png)'})
+        }else if(i === 7 && inPlay[i] === 50){
+            $('#player2Card1').css({'background-image': 'url(images/ace_of_clubs.png)'})
+        }else if(i === 7 && inPlay[i] === 51){
+            $('#player2Card1').css({'background-image': 'url(images/ace_of_hearts.png)'})
+        }else if(i === 7 && inPlay[i] === 52){
+            $('#player2Card1').css({'background-image': 'url(images/ace_of_spades.png)'})
+        }
+
+
+        // CARD PLAYER 2 CARD 2 ===========================================
+
+        else if(i === 8 && inPlay[i] === 1){
+            $('#player2Card2').css({'background-image': 'url(images/2_of_diamonds.png)'})
+        }else if(i === 8 && inPlay[i] === 2){
+            $('#player2Card2').css({'background-image': 'url(images/2_of_clubs.png)'})
+        }else if(i === 8 && inPlay[i] === 3){
+            $('#player2Card2').css({'background-image': 'url(images/2_of_hearts.png)'})
+        }else if(i === 8 && inPlay[i] === 4){
+            $('#player2Card2').css({'background-image': 'url(images/2_of_spades.png)'})
+        }else if(i === 8 && inPlay[i] === 5){
+            $('#player2Card2').css({'background-image': 'url(images/3_of_diamonds.png)'})
+        }else if(i === 8 && inPlay[i] === 6){
+            $('#player2Card2').css({'background-image': 'url(images/3_of_clubs.png)'})
+        }else if(i === 8 && inPlay[i] === 7){
+            $('#player2Card2').css({'background-image': 'url(images/3_of_hearts.png)'})
+        }else if(i === 8 && inPlay[i] === 8){
+            $('#player2Card2').css({'background-image': 'url(images/3_of_spades.png)'})
+        }else if(i === 8 && inPlay[i] === 9){
+            $('#player2Card2').css({'background-image': 'url(images/4_of_diamonds.png)'})
+        }else if(i === 8 && inPlay[i] === 10){
+            $('#player2Card2').css({'background-image': 'url(images/4_of_clubs.png)'})
+        }else if(i === 8 && inPlay[i] === 11){
+            $('#player2Card2').css({'background-image': 'url(images/4_of_hearts.png)'})
+        }else if(i === 8 && inPlay[i] === 12){
+            $('#player2Card2').css({'background-image': 'url(images/4_of_spades.png)'})
+        }else if(i === 8 && inPlay[i] === 13){
+            $('#player2Card2').css({'background-image': 'url(images/5_of_diamonds.png)'})
+        }else if(i === 8 && inPlay[i] === 14){
+            $('#player2Card2').css({'background-image': 'url(images/5_of_clubs.png)'})
+        }else if(i === 8 && inPlay[i] === 15){
+            $('#player2Card2').css({'background-image': 'url(images/5_of_hearts.png)'})
+        }else if(i === 8 && inPlay[i] === 16){
+            $('#player2Card2').css({'background-image': 'url(images/5_of_spades.png)'})
+        }else if(i === 8 && inPlay[i] === 18){
+            $('#player2Card2').css({'background-image': 'url(images/6_of_diamonds.png)'})
+        }else if(i === 8 && inPlay[i] === 18){
+            $('#player2Card2').css({'background-image': 'url(images/6_of_clubs.png)'})
+        }else if(i === 8 && inPlay[i] === 19){
+            $('#player2Card2').css({'background-image': 'url(images/6_of_hearts.png)'})
+        }else if(i === 8 && inPlay[i] === 20){
+            $('#player2Card2').css({'background-image': 'url(images/6_of_spades.png)'})
+        }else if(i === 8 && inPlay[i] === 21){
+            $('#player2Card2').css({'background-image': 'url(images/8_of_diamonds.png)'})
+        }else if(i === 8 && inPlay[i] === 22){
+            $('#player2Card2').css({'background-image': 'url(images/8_of_clubs.png)'})
+        }else if(i === 8 && inPlay[i] === 23){
+            $('#player2Card2').css({'background-image': 'url(images/8_of_hearts.png)'})
+        }else if(i === 8 && inPlay[i] === 24){
+            $('#player2Card2').css({'background-image': 'url(images/8_of_spades.png)'})
+        }else if(i === 8 && inPlay[i] === 25){
+            $('#player2Card2').css({'background-image': 'url(images/8_of_diamonds.png)'})
+        }else if(i === 8 && inPlay[i] === 26){
+            $('#player2Card2').css({'background-image': 'url(images/8_of_clubs.png)'})
+        }else if(i === 8 && inPlay[i] === 28){
+            $('#player2Card2').css({'background-image': 'url(images/8_of_hearts.png)'})
+        }else if(i === 8 && inPlay[i] === 28){
+            $('#player2Card2').css({'background-image': 'url(images/8_of_spades.png)'})
+        }else if(i === 8 && inPlay[i] === 29){
+            $('#player2Card2').css({'background-image': 'url(images/9_of_diamonds.png)'})
+        }else if(i === 8 && inPlay[i] === 30){
+            $('#player2Card2').css({'background-image': 'url(images/9_of_clubs.png)'})
+        }else if(i === 8 && inPlay[i] === 31){
+            $('#player2Card2').css({'background-image': 'url(images/9_of_hearts.png)'})
+        }else if(i === 8 && inPlay[i] === 32){
+            $('#player2Card2').css({'background-image': 'url(images/9_of_spades.png)'})
+        }else if(i === 8 && inPlay[i] === 33){
+            $('#player2Card2').css({'background-image': 'url(images/10_of_diamonds.png)'})
+        }else if(i === 8 && inPlay[i] === 34){
+            $('#player2Card2').css({'background-image': 'url(images/10_of_clubs.png)'})
+        }else if(i === 8 && inPlay[i] === 35){
+            $('#player2Card2').css({'background-image': 'url(images/10_of_hearts.png)'})
+        }else if(i === 8 && inPlay[i] === 36){
+            $('#player2Card2').css({'background-image': 'url(images/10_of_spades.png)'})
+        }else if(i === 8 && inPlay[i] === 38){
+            $('#player2Card2').css({'background-image': 'url(images/jack_of_diamonds2.png)'})
+        }else if(i === 8 && inPlay[i] === 38){
+            $('#player2Card2').css({'background-image': 'url(images/jack_of_clubs2.png)'})
+        }else if(i === 8 && inPlay[i] === 39){
+            $('#player2Card2').css({'background-image': 'url(images/jack_of_hearts2.png)'})
+        }else if(i === 8 && inPlay[i] === 40){
+            $('#player2Card2').css({'background-image': 'url(images/jack_of_spades2.png)'})
+        }else if(i === 8 && inPlay[i] === 41){
+            $('#player2Card2').css({'background-image': 'url(images/queen_of_diamonds2.png)'})
+        }else if(i === 8 && inPlay[i] === 42){
+            $('#player2Card2').css({'background-image': 'url(images/queen_of_clubs2.png)'})
+        }else if(i === 8 && inPlay[i] === 43){
+            $('#player2Card2').css({'background-image': 'url(images/queen_of_hearts2.png)'})
+        }else if(i === 8 && inPlay[i] === 44){
+            $('#player2Card2').css({'background-image': 'url(images/queen_of_spades2.png)'})
+        }else if(i === 8 && inPlay[i] === 45){
+            $('#player2Card2').css({'background-image': 'url(images/king_of_diamonds2.png)'})
+        }else if(i === 8 && inPlay[i] === 46){
+            $('#player2Card2').css({'background-image': 'url(images/king_of_clubs2.png)'})
+        }else if(i === 8 && inPlay[i] === 48){
+            $('#player2Card2').css({'background-image': 'url(images/king_of_hearts2.png)'})
+        }else if(i === 8 && inPlay[i] === 48){
+            $('#player2Card2').css({'background-image': 'url(images/king_of_spades2.png)'})
+        }else if(i === 8 && inPlay[i] === 49){
+            $('#player2Card2').css({'background-image': 'url(images/ace_of_diamonds.png)'})
+        }else if(i === 8 && inPlay[i] === 50){
+            $('#player2Card2').css({'background-image': 'url(images/ace_of_clubs.png)'})
+        }else if(i === 8 && inPlay[i] === 51){
+            $('#player2Card2').css({'background-image': 'url(images/ace_of_hearts.png)'})
+        }else if(i === 8 && inPlay[i] === 52){
+            $('#player2Card2').css({'background-image': 'url(images/ace_of_spades.png)'})
+        }
+    }
+    firstRound();
+}
+var turn = function(){
+    for (var i = 0; i < inPlay.length; i++){
+        console.log(inPlay[i]);
+
         // CARD 4 ============================================================
 
-        else if(i === 3 && inPlay[i] === 1){
+        if(i === 3 && inPlay[i] === 1){
             $('#card4').css({'background-image': 'url(images/2_of_diamonds.png)'})
         }else if(i === 3 && inPlay[i] === 2){
             $('#card4').css({'background-image': 'url(images/2_of_clubs.png)'})
@@ -452,10 +910,15 @@ var setCards = function(){
         }else if(i === 3 && inPlay[i] === 52){
             $('#card4').css({'background-image': 'url(images/ace_of_spades.png)'})
         }
+    }
+}
+var river = function(){
+    for (var i = 0; i < inPlay.length; i++){
+        console.log(inPlay[i]);
 
         // CARD 5 ============================================================
 
-        else if(i === 4 && inPlay[i] === 1){
+        if(i === 4 && inPlay[i] === 1){
             $('#card5').css({'background-image': 'url(images/2_of_diamonds.png)'})
         }else if(i === 4 && inPlay[i] === 2){
             $('#card5').css({'background-image': 'url(images/2_of_clubs.png)'})
@@ -562,8 +1025,32 @@ var setCards = function(){
         }
     }
 }
+var firstRound = function(){
+
+    $prompt.text('First round of bets starts now! Player One, How much do you want to bet?');
+
+    var $bet = $('#bet-submit');
+    var $betBox = $('#bet-box');
+    var $betInput = $betBox.val();
+    $bet.on('click', firstRound2);
+}
+
+var firstRound2 = function(){
+    var $betBox = $('#bet-box');
+    var $console = $('#console');
+    var $betInput = $betBox.val();
+    $console.children().remove();
+    $prompt.text('Player 1 has bet ' + $betInput);
+    // $prompt.remove($betBox);
+}
+
+
 shuffle();
-setCards();
+$start.on('click', startGame)
+$turn.on('click', turn)
+$river.on('click', river)
+
+// setCards();
 
 
 }); // end window onload
