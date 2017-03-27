@@ -911,6 +911,7 @@ var turn = function(){
             $('#card4').css({'background-image': 'url(images/ace_of_spades.png)'})
         }
     }
+    firstRound();
 }
 var river = function(){
     for (var i = 0; i < inPlay.length; i++){
@@ -1024,23 +1025,47 @@ var river = function(){
             $('#card5').css({'background-image': 'url(images/ace_of_spades.png)'})
         }
     }
+
+    firstRound();
 }
 var currentBet = 0;
 var raiseAmount = 0;
 var turnNum = 1;
 var firstRound = function(){
 
+    var $console = $('#console');
+
     if (turnNum === 1){
         $prompt.text('First round of bets starts now! Player One, How much do you want to bet?');
-    } else if (turnNum ===2 ) {
-        $prompt.text('Second round of bets starts now! Player One, How much do you want to bet?');
-    }
 
-    var $bet = $('#bet-submit');
-    var $firstBetBox = $('#first-bet-box');
-    var $firstBetInput = $firstBetBox.val();
-    currentBet = currentBet + parseInt($firstBetInput);
-    $bet.on('click', firstRound2);
+        var $bet = $('#bet-submit');
+        var $firstBetBox = $('#first-bet-box');
+        var $firstBetInput = $firstBetBox.val();
+        currentBet = currentBet + parseInt($firstBetInput);
+        $bet.on('click', firstRound2);
+    }else if (turnNum === 2){
+        console.log("turn 2 after turn works");
+        $prompt.text('Second round of bets starts now! Player One, How much do you want to bet?');
+        var $bet = $('<button>').attr('id', 'bet-submit').addClass('inputButton').text('BET');
+        var $firstBetBox = $('<input>').attr('id', 'first-bet-box').addClass('inputBox');
+        $console.append($firstBetBox);
+        $console.append($bet);
+        var $firstBetInput = $firstBetBox.val();
+        currentBet = currentBet + parseInt($firstBetInput);
+        $bet.on('click', firstRound2);
+
+    }else if (turnNum === 3){
+        console.log("turn 3 after turn works");
+        $prompt.text('Final round of bets starts now! Player One, How much do you want to bet?');
+        var $bet = $('<button>').attr('id', 'bet-submit').addClass('inputButton').text('BET');
+        var $firstBetBox = $('<input>').attr('id', 'first-bet-box').addClass('inputBox');
+        $console.append($firstBetBox);
+        $console.append($bet);
+        var $firstBetInput = $firstBetBox.val();
+        currentBet = currentBet + parseInt($firstBetInput);
+        $bet.on('click', firstRound2);
+
+    }
 }
 
 var firstRound2 = function(){
@@ -1073,9 +1098,17 @@ var firstRound2 = function(){
     $fold.on('click', player2Folds);
 }
 var player2Calls = function(){
-    $prompt.text('Player 2 calls... Now for the turn...')
-    turnNum++;
-    turn();
+    if (turnNum === 1){
+        $prompt.text('Player 2 calls... Now for the turn...')
+        turnNum++;
+        console.log(turnNum);
+        turn();
+    }else if(turnNum === 2){
+        $prompt.text('Player 2 calls... Now for the river...')
+        turnNum++;
+        console.log(turnNum);
+        river();
+    }
 }
 var player2Folds = function(){
     $prompt.text('Player One wins the pot!')
