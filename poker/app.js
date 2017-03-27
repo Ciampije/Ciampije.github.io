@@ -1061,7 +1061,7 @@ var firstRound = function(){
         $console.append($bet);
         var $firstBetInput = $firstBetBox.val();
         currentBet = currentBet + parseInt($firstBetInput);
-        
+
         console.log("current bet is " + currentBet);
         console.log("total bet is " + totalBet);
         $bet.on('click', firstRound2);
@@ -1186,10 +1186,10 @@ var player1AfterRaise = function(){
 
 var player1Calls = function(){
     var $player1Score = $('#player1Score');
-    $player1Score.text(player1Money - currentBet);
+    $player1Score.text(player1Money - totalBet);
 
     var $player2Score = $('#player2Score');
-    $player2Score.text(player2Money - currentBet);
+    $player2Score.text(player2Money - totalBet);
     $prompt.text('Player 1 has called. Now for the turn...');
     turn();
 
