@@ -1,0 +1,61 @@
+/** {
+    border: 1px solid red;
+}*/
+body {
+    background-color: green;
+}
+h1 {
+    float: none;
+}
+
+.score {
+    border: 1px solid black;
+    height: 75px;
+    width: 100px;
+    display: inline-flex;
+    justify-content: space-between;
+}
+#player1Score {
+    float: left;
+}
+#player2Score {
+    float: right;
+}
+.card {
+    border: 1px solid black;
+    min-height: 275px;
+    min-width: 150px;
+    display: inline-block;
+    background: url("http://www.jimknapp.com/Cards/Bicycle_files/image160.jpg");
+    background-size: 100% 100%;
+    border-radius: 5px;
+}
+
+#main {
+    text-align: center;
+    clear: both;
+    display: flex;
+    padding-top: 100px;
+    justify-content: space-around;
+    padding-bottom: 100px;
+}
+
+/*#bottom
+{
+
+    display:flex;
+}*/
+
+#bottomLeft {
+    float: left;
+}
+
+#bottomRight {
+    float: right;
+}
+
+.bet {
+    border: 1px solid black;
+    min-height: 75px;
+    min-width: 100px;
+}
