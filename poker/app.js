@@ -1039,9 +1039,23 @@ var firstRound2 = function(){
     var $betBox = $('#bet-box');
     var $console = $('#console');
     var $betInput = $betBox.val();
-    $console.children().remove();
+    $console.children().remove('#bet-box');
+    $console.children().remove('#bet-submit');
+    // $player1Score.remove(player1Money);
+    // player1Money -= $betInput;
+    // $player1Score.append(player1Money);
     $prompt.text('Player 1 has bet ' + $betInput);
-    // $prompt.remove($betBox);
+    $prompt.append('<br>');
+    $prompt.append('Player 2 what would you like to do?');
+    $prompt.append('<br>');
+    var $call = $('<button>').text("CALL");
+    $prompt.append($call);
+    var $raise = $('<button>').text("RAISE");
+    $prompt.append($raise);
+    var $fold = $('<button>').text("FOLD");
+    $prompt.append($fold);
+
+
 }
 
 
