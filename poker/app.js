@@ -24,7 +24,9 @@ onTable[6] = player1Card2;
 onTable[7] = player2Card1;
 onTable[8] = player2Card2;
 
-console.log(onTable);
+// onTable[0].value = 3;
+
+// console.log(onTable);
 
 var player1Money = 1000;
 var player2Money = 1000;
@@ -55,16 +57,91 @@ var shuffle = function(){
     }
 }
 
-// var findValues = function(){
-//
-//     for (i = 0; i < inPlay.length; i++){
-//         if(i>=0 && i<=4){
-//             if(inPlay[i])
-//         }
-//
-//     }
-//
-// }
+var findSuit = function(){
+    for (i = 0; i < inPlay.length; i++){
+        var mod = inPlay[i]%4;
+        if(inPlay[i]>4){
+            console.log(mod);
+            if(mod === 0){
+                onTable[i].suit = 'spades';
+            }else if(mod === 1){
+                onTable[i].suit = 'diamonds';
+            }else if(mod === 2){
+                onTable[i].suit = 'clubs';
+            }else if(mod === 3){
+                onTable[i].suit = 'hearts';
+            }
+        }
+        if(inPlay[i] === 1){
+            onTable[i].suit = 'diamonds';
+            onTable[i].value  = 2;
+            onTable[i].name = 'two';
+        }else if(inPlay[i] === 2){
+            onTable[i].suit = 'clubs';
+            onTable[i].value  = 2;
+            onTable[i].name = 'two';
+        }else if(inPlay[i] === 3){
+            onTable[i].suit = 'hearts';
+            onTable[i].value  = 2;
+            onTable[i].name = 'two';
+        }else if(inPlay[i] === 4){
+            onTable[i].suit = 'spades';
+            onTable[i].value  = 2;
+            onTable[i].name = 'two';
+        }
+    }
+}
+
+var findValues = function(){
+    for (i = 0; i < inPlay.length; i++){
+        var divide = inPlay[i]/4;
+        var mod = inPlay[i]%4;
+        if(inPlay[i]>4){
+            if(divide <= 1){
+                onTable[i].value = 2;
+                onTable[i].name = 'two';
+            }else if(divide> 1 && divide <= 2){
+                onTable[i].value = 3;
+                onTable[i].name = 'three';
+            }else if(divide> 2 && divide <= 3){
+                onTable[i].value = 4;
+                onTable[i].name = 'four';
+            }else if(divide> 3 && divide <= 4){
+                onTable[i].value = 5;
+                onTable[i].name = 'five';
+            }else if(divide> 4 && divide <= 5){
+                onTable[i].value = 6;
+                onTable[i].name = 'six';
+            }else if(divide> 5 && divide <= 6){
+                onTable[i].value = 7;
+                onTable[i].name = 'seven';
+            }else if(divide> 6 && divide <= 7){
+                onTable[i].value = 8;
+                onTable[i].name = 'eight';
+            }else if(divide> 7 && divide <= 8){
+                onTable[i].value = 9;
+                onTable[i].name = 'nine';
+            }else if(divide> 8 && divide <= 9){
+                onTable[i].value = 10;
+                onTable[i].name = 'ten';
+            }else if(divide> 9 && divide <= 10){
+                onTable[i].value = 11;
+                onTable[i].name = 'jack';
+            }else if(divide> 10 && divide <= 11){
+                onTable[i].value = 12;
+                onTable[i].name = 'queen';
+            }else if(divide> 11 && divide <= 12){
+                onTable[i].value = 13;
+                onTable[i].name = 'king';
+            }else if(divide> 12){
+                onTable[i].value = 14;
+                onTable[i].name = 'ace';
+            }
+        }
+    }
+}
+console.log(inPlay);
+console.log(onTable);
 
 var startGame = function(){
     $prompt.text('Welcome to Texas Hold Em Poker!')
@@ -1229,6 +1306,8 @@ var player1Folds = function(){
     $prompt.text('Player 1 has folded, Player 2 wins!');
 }
 shuffle();
+findSuit();
+findValues();
 $start.on('click', startGame)
 $turn.on('click', turn)
 $river.on('click', river)
