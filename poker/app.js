@@ -1,16 +1,30 @@
 console.log("js working");
 $(function() {
 
-var card1;
-var card2;
-var card3;
-var card4;
-var card5;
-var playerCard1;
-var card7;
-var card8;
-var card9;
+
 var inPlay = [];
+var onTable = [];
+var card1 = {};
+var card2 = {};
+var card3 = {};
+var card4 = {};
+var card5 = {};
+var player1Card1 = {};
+var player1Card2 = {};
+var player2Card1 = {};
+var player2Card2 = {};
+
+onTable[0] = card1;
+onTable[1] = card2;
+onTable[2] = card3;
+onTable[3] = card4;
+onTable[4] = card5;
+onTable[5] = player1Card1;
+onTable[6] = player1Card2;
+onTable[7] = player2Card1;
+onTable[8] = player2Card2;
+
+console.log(onTable);
 
 var player1Money = 1000;
 var player2Money = 1000;
@@ -31,13 +45,30 @@ var shuffle = function(){
     for (var i = 0; i < 9; i++){
         var cardNum = Math.floor(Math.random() * (52 - 1)) + 1;
         inPlay.push(cardNum);
+        // if(i>=0 && i<=4){
+        //     onTable.push(cardNum);
+        // }else if(i>4 && i<=6){
+        //     player1Cards.push(cardNum);
+        // }else if (i>6){
+        //     player2Cards.push(cardNum);
+        // }
     }
 }
+
+// var findValues = function(){
+//
+//     for (i = 0; i < inPlay.length; i++){
+//         if(i>=0 && i<=4){
+//             if(inPlay[i])
+//         }
+//
+//     }
+//
+// }
 
 var startGame = function(){
     $prompt.text('Welcome to Texas Hold Em Poker!')
     for (var i = 0; i < inPlay.length; i++){
-        // console.log(inPlay[i]);
         // CARD 1 ================================
         if(i === 0 && inPlay[i] === 1){
             $('#card1').css({'background-image': 'url(images/2_of_diamonds.png)'})
