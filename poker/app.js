@@ -14,6 +14,9 @@ var player1Card2 = {};
 var player2Card1 = {};
 var player2Card2 = {};
 
+var player1Result;
+var player2Result;
+
 onTable[0] = card1;
 onTable[1] = card2;
 onTable[2] = card3;
@@ -23,6 +26,11 @@ onTable[5] = player1Card1;
 onTable[6] = player1Card2;
 onTable[7] = player2Card1;
 onTable[8] = player2Card2;
+
+var player1HandValue = [];
+var player2HandValue = [];
+var player1HandSuit = [];
+var player2HandSuit = [];
 
 var inOrder = [];
 
@@ -181,6 +189,84 @@ var river = function(){
     }
     firstRound();
 }
+var setHands = function(){
+    console.log(onTable);
+    for(i = 0; i < 7; i++){
+        player1HandValue.push(onTable[i].value);
+        player1HandSuit.push(onTable[i].suit);
+    }
+    for(i = 0; i < 9; i++){
+        if(i !== 5 && i !== 6){
+            player2HandValue.push(onTable[i].value);
+            player2HandSuit.push(onTable[i].suit);
+        }
+    }
+
+}
+var checkPlayer1 = function(){
+    player1HandValue.sort(function(a, b){return a-b});
+    player1HandSuit.sort();
+    var pairs;
+    //check for a pair
+    for(i = 0; i < player1HandValue.length; i++){
+        if(player1HandValue[i]=== player1HandValue[i+1]){
+            console.log("found a pair of " + player1HandValue[i] + "s.");
+            pairs++;
+            player1Result = 2;
+        }
+    }
+    //check for a three of a kind
+    for(i = 0; i < player1HandValue.length; i++){
+        if(player1HandValue[i]=== player1HandValue[i+1] && player1HandValue[i] === player1HandValue[i+2]){
+            console.log("found a three of a kind of " + player1HandValue[i] + "s.");
+            player1Result = 3;
+        }
+    }
+    //check for a straight
+    for(i = 0; i < player1HandValue.length; i++){
+        if(player1HandValue[i]+ 1 === player1HandValue[i+1] && player1HandValue[i]+2 === player1HandValue[i+2] && player1HandValue[i]+3 === player1HandValue[i+3] && player1HandValue[i]+4 === player1HandValue[i+4]){
+            console.log("found a straight");
+            player1Result = 4;
+        }
+    }
+}
+var checkPlayer2 = function(){
+    player2HandValue.sort(function(a, b){return a-b});
+    player2HandSuit.sort();
+    var pairs;
+    //check for a pair
+    for(i = 0; i < player2HandValue.length; i++){
+        if(player2HandValue[i]=== player2HandValue[i+1]){
+            console.log("found a pair of " + player2HandValue[i] + "s.");
+            pairs++;
+            player2Result = 2;
+        }
+    }
+    //check for a three of a kind
+    for(i = 0; i < player2HandValue.length; i++){
+        if(player2HandValue[i]=== player2HandValue[i+1] && player2HandValue[i] === player2HandValue[i+2]){
+            console.log("found a three of a kind of " + player2HandValue[i] + "s.");
+            player2Result = 3;
+        }
+    }
+    //check for a straight
+    for(i = 0; i < player1HandValue.length; i++){
+        if(player2HandValue[i]+ 1 === player2HandValue[i+1] && player2HandValue[i]+2 === player2HandValue[i+2] && player2HandValue[i]+3 === player2HandValue[i+3] && player2HandValue[i]+4 === player2HandValue[i+4]){
+            console.log("found a straight");
+            player2Result = 4;
+        }
+    }
+}
+
+var checkWinner = function(){
+    if(player1Result > player2Result){
+        console.log("Player 1 Wins");
+    }else if(player2Result > player1Result){
+        console.log("Player 2 Wins");
+    }else{
+        console.log("Split the pot");
+    }
+}
 
 var currentBet = 0;
 var totalBet = 0;
@@ -286,6 +372,13 @@ var player2Calls = function(){
         turnNum++;
         console.log(turnNum);
         river();
+    }else if (turnNum === 3){
+        var $player2Score = $('#player2Score');
+        $player2Score.text(player2Money - totalBet);
+        setHands();
+        checkPlayer1();
+        checkPlayer2();
+        checkWinner();
     }
 }
 var player2Folds = function(){
