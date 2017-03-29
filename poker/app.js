@@ -24,9 +24,8 @@ onTable[6] = player1Card2;
 onTable[7] = player2Card1;
 onTable[8] = player2Card2;
 
-// onTable[0].value = 3;
+var inOrder = [];
 
-// console.log(onTable);
 
 var player1Money = 1000;
 var player2Money = 1000;
@@ -44,17 +43,21 @@ var $river = $('#river');
 var $turn = $('#turn');
 
 var shuffle = function(){
-    for (var i = 0; i < 9; i++){
+    var til = 9;
+    for (var i = 0; i < til; i++){
         var cardNum = Math.floor(Math.random() * (52 - 1)) + 1;
         inPlay.push(cardNum);
-        // if(i>=0 && i<=4){
-        //     onTable.push(cardNum);
-        // }else if(i>4 && i<=6){
-        //     player1Cards.push(cardNum);
-        // }else if (i>6){
-        //     player2Cards.push(cardNum);
-        // }
+        for(j = 0; j < inPlay.length; j++){
+            inPlay.sort(function(a, b){return a-b});
+
+            if(inPlay[j] === inPlay[j+1]){
+                console.log("repeat detected");
+                inPlay.pop();
+                i--;
+            }
+        }
     }
+    inPlay.sort(function(a, b){return 0.5 - Math.random()});
 }
 
 var findSuit = function(){
@@ -95,7 +98,6 @@ var findSuit = function(){
 var findValues = function(){
     for (i = 0; i < inPlay.length; i++){
         var divide = inPlay[i]/4;
-        var mod = inPlay[i]%4;
         if(inPlay[i]>4){
             if(divide <= 1){
                 onTable[i].value = 2;
@@ -184,10 +186,9 @@ var currentBet = 0;
 var totalBet = 0;
 var raiseAmount = 0;
 var turnNum = 1;
+
 var firstRound = function(){
-
     var $console = $('#console');
-
     if (turnNum === 1){
         $prompt.text('First round of bets starts now! Player One, How much do you want to bet?');
 
@@ -198,10 +199,8 @@ var firstRound = function(){
 
         $bet.on('click', firstRound2);
 
-        console.log(currentBet);
-        console.log("total bet is" + totalBet);
-
-
+        // console.log(currentBet);
+        // console.log("total bet is" + totalBet);
 
     }else if (turnNum === 2){
 
