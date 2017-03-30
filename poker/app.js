@@ -16,8 +16,14 @@ var player2Card2 = {};
 
 var pot;
 
-var player1Result;
-var player2Result;
+var pairs1 = 0;
+var pairs2 = 0;
+
+var tiebreakerPairPlayer1;
+var tiebreakerPairPlayer2;
+
+var player1Result = 0;
+var player2Result = 0;
 
 onTable[0] = card1;
 onTable[1] = card2;
@@ -189,6 +195,7 @@ var turn = function(){
             $('#card4').css({'background-image': 'url(images/' + onTable[i].value + '_of_' + onTable[i].suit + '.png)'})
         }
     }
+    console.log('current bet is ' + currentBet + 'and pot is ' + pot);
     firstRound();
 }
 var river = function(){
@@ -197,6 +204,7 @@ var river = function(){
             $('#card5').css({'background-image': 'url(images/' + onTable[i].value + '_of_' + onTable[i].suit + '.png)'})
         }
     }
+    console.log('current bet is ' + currentBet + 'and pot is ' + pot);
     firstRound();
 }
 
@@ -209,6 +217,8 @@ var firstRound = function(){
         var $firstBetBox = $('#first-bet-box');
         $console.append($firstBetBox);
         $console.append($bet);
+
+
 
         $bet.on('click', firstRound2);
 
@@ -259,7 +269,6 @@ var firstRound2 = function(){
     pot += parseInt($betInput2);
     currentBet = parseInt($betInput2);
 
-    console.log('current bet is ' + currentBet + 'and pot is ' + pot);
 
     var $player1Score = $('#player1Score');
 
@@ -277,21 +286,33 @@ var firstRound2 = function(){
 
     $prompt.text('Player 1 has bet ' + currentBet);
     $prompt.append('<br>');
-    $prompt.append('Player 2 what would you like to do?');
+    $prompt.append('Genius bot is determing its move');
     $prompt.append('<br>');
-    var $call = $('<button>').text("CALL");
-    $prompt.append($call);
-    var $raise = $('<button>').text("RAISE");
-    $prompt.append($raise);
-    var $fold = $('<button>').text("FOLD");
-    $prompt.append($fold);
 
-    console.log(pot);
+    var choice = Math.floor(Math.random() * (10 - 1)) + 1;
+
+    console.log(choice);
+
+    if(choice > 0 && choice <=6){
+        player2Calls();
+    }else if(choice >6 && choice <=8){
+        player2Folds();
+    }else{
+        player2Raises();
+    }
+    // var $call = $('<button>').text("CALL");
+    // $prompt.append($call);
+    // var $raise = $('<button>').text("RAISE");
+    // $prompt.append($raise);
+    // var $fold = $('<button>').text("FOLD");
+    // $prompt.append($fold);
+
+    console.log('current bet is ' + currentBet + 'and pot is ' + pot);
 
 
-    $call.on('click', player2Calls);
-    $raise.on('click', player2Raises);
-    $fold.on('click', player2Folds);
+    // $call.on('click', player2Calls);
+    // $raise.on('click', player2Raises);
+    // $fold.on('click', player2Folds);
 }
 var player2Calls = function(){
     if (turnNum === 1){
@@ -299,7 +320,8 @@ var player2Calls = function(){
         var $player2Score = $('#player2Score');
         player2Money = player2Money - currentBet;
         $player2Score.text(player2Money);
-        $prompt.text('Player 2 calls... Now for the turn...')
+
+        $prompt.text('Player 2 calls... Now for the turn...').delay(3000);
         turnNum++;
         console.log(turnNum);
         console.log(pot);
@@ -326,6 +348,8 @@ var player2Calls = function(){
         pot = pot + currentBet;
         var $potBox = $('#pot');
         $pot.text("pot is at $" + pot);
+
+        console.log('current bet is ' + currentBet + 'and pot is ' + pot);
 
         setHands();
         checkPlayer1();
@@ -362,6 +386,8 @@ var player2Raises = function(){
     $console.append($raiseInputBox);
     $console.append($raiseButton);
 
+    console.log('current bet is ' + currentBet + 'and pot is ' + pot);
+
     $raiseButton.on('click', player1AfterRaise)
 }
 var player1AfterRaise = function(){
@@ -370,8 +396,10 @@ var player1AfterRaise = function(){
     raiseAmount = parseInt($raise);
 
     var $console = $('#console');
-    pot += raiseAmount;
+    console.log("raise amount is " + raiseAmount);
+    // pot += raiseAmount;
     currentBet += raiseAmount;
+    pot += currentBet;
     $console.children().detach('#raiseInputBox');
     $console.children().detach('#raiseButton');
     $prompt.text('Player 2 has raised the bet to ' + currentBet + '. Player 1, whats your move?');
@@ -386,7 +414,7 @@ var player1AfterRaise = function(){
     var $potBox = $('#pot');
     $pot.text("pot is at $" + pot);
 
-
+    console.log('current bet is ' + currentBet + 'and pot is ' + pot);
 
     $call.on('click', player1Calls);
     $fold.on('click', player1Folds);
@@ -402,10 +430,15 @@ var player1Calls = function(){
         var $player2Score = $('#player2Score');
         $player2Money = player2Money - raiseAmount;
         $player2Score.text(player2Money);
-        $prompt.text('Player 1 has called. Now for the turn...');
+        setTimeout(function () {
+            $prompt.text('Player 1 has called. Now for the turn...');
+        }, 1000);
+
         var $potBox = $('#pot');
         pot += raiseAmount;
         $pot.text("pot is at $" + pot);
+
+        console.log('current bet is ' + currentBet + 'and pot is ' + pot);
 
         setHands();
         checkPlayer1();
@@ -420,7 +453,7 @@ var player1Calls = function(){
         player2Money = player2Money - currentBet
         $player2Score.text(player2Money);
         $prompt.text('Player 1 has called. Now for the river...');
-        pot += (raiseAmount*2);
+        pot += raiseAmount;
         var $potBox = $('#pot');
         $pot.text("pot is at $" + pot);
         turnNum++;
@@ -434,10 +467,12 @@ var player1Calls = function(){
         player2Money = player2Money - currentBet
         $player2Score.text(player2Money);
         $prompt.text('Player 1 has called. Now for the turn...');
-        pot += raiseAmount
+        pot += raiseAmount;
         var $potBox = $('#pot');
         $pot.text("pot is at $" + pot);
         turnNum++;
+
+        console.log('current bet is ' + currentBet + 'and pot is ' + pot);
         turn();
     }
 }
@@ -511,18 +546,20 @@ var nextRound = function(){
 var checkPlayer1 = function(){
     player1HandValue.sort(function(a, b){return a-b});
     player1HandSuit.sort();
-    var pairs;
+    console.log("player 1 hand value is " + player1HandValue);
     //check for a pair
     for(i = 0; i < player1HandValue.length; i++){
         if(player1HandValue[i]=== player1HandValue[i+1]){
             console.log("found a pair of " + player1HandValue[i] + "s.");
-            pairs++;
-            if(pairs === 1){
+            tiebreakerPairPlayer1 = player1HandValue[i];
+            pairs1++;
+            console.log("the amount of pairs is " + pairs1);
+            if(pairs1 === 1){
                 player1Result = 1;
-            }else if(pairs === 2){
+            }else if(pairs1 === 2){
                 player1Result = 2;
             }
-            
+
         }
     }
     //check for a three of a kind
@@ -543,15 +580,17 @@ var checkPlayer1 = function(){
 var checkPlayer2 = function(){
     player2HandValue.sort(function(a, b){return a-b});
     player2HandSuit.sort();
-    var pairs;
+    console.log("player 2 hand value is " + player2HandValue);
+
     //check for a pair
     for(i = 0; i < player2HandValue.length; i++){
         if(player2HandValue[i]=== player2HandValue[i+1]){
             console.log("found a pair of " + player2HandValue[i] + "s.");
-            pairs++;
-            if(pairs === 1){
+            tiebreakerPairPlayer2 = player2HandValue[i];
+            pairs2++;
+            if(pairs2 === 1){
                 player2Result = 1;
-            }else if(pairs === 2){
+            }else if(pairs2 === 2){
                 player2Result = 2;
             }
         }
@@ -577,7 +616,11 @@ var checkWinner = function(){
     var $player2Score = $('#player2Score');
     var $console = $('#console');
 
+    console.log("player 1 result is " + player1Result);
+    console.log("player2 result is " + player2Result);
+
     if(player1Result > player2Result){
+
         console.log("Player 1 Wins");
         $prompt.text('Player 1 has Won the hand');
         player1Money = player1Money + pot;
@@ -590,11 +633,27 @@ var checkWinner = function(){
         console.log("Player 2 has Won the hand");
         $prompt.text('Player 2 has won the hand');
         player2Money = player2Money + pot;
-        $player2Score.text(player2Money + pot );
+        $player2Score.text(player2Money);
         var $again = $('<button>').addClass('inputButton').text('Play Next Round');
         $console.append($again);
         $again.on('click', nextRound)
 
+    }else if (tiebreakerPairPlayer1 > tiebreakerPairPlayer2){
+        console.log("Player 1 Wins");
+        $prompt.text('Player 1 has Won the hand');
+        player1Money = player1Money + pot;
+        $player1Score.text(player1Money);
+        var $again = $('<button>').addClass('inputButton').text('Play Next Round');
+        $console.append($again);
+        $again.on('click', nextRound)
+    }else if (tiebreakerPairPlayer2 > tiebreakerPairPlayer1){
+        console.log("Player 2 has Won the hand");
+        $prompt.text('Player 2 has won the hand');
+        player2Money = player2Money + pot;
+        $player2Score.text(player2Money);
+        var $again = $('<button>').addClass('inputButton').text('Play Next Round');
+        $console.append($again);
+        $again.on('click', nextRound)
     }else{
         console.log("Split the pot");
         $prompt.text('Split the pot');
