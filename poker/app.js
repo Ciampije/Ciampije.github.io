@@ -2,6 +2,7 @@ console.log("js working");
 $(function() {
 
 
+//arrays and objects for all the cards in play to be in
 var inPlay = [];
 var onTable = [];
 var card1 = {};
@@ -14,17 +15,22 @@ var player1Card2 = {};
 var player2Card1 = {};
 var player2Card2 = {};
 
-var pot;
+//holds the amount of money available to win during each hand
+var pot = 0;
 
+//variable to hold the amount of single pairs a hand has
 var pairs1 = 0;
 var pairs2 = 0;
 
+//holds a value if both hands have a pair
 var tiebreakerPairPlayer1;
 var tiebreakerPairPlayer2;
 
+//holds the value for each hand to compare at the end to see who wins
 var player1Result = 0;
 var player2Result = 0;
 
+//puts each card as an object into the onTable array
 onTable[0] = card1;
 onTable[1] = card2;
 onTable[2] = card3;
@@ -35,6 +41,7 @@ onTable[6] = player1Card2;
 onTable[7] = player2Card1;
 onTable[8] = player2Card2;
 
+//arrays to hold each players hand to check to see what value playerResult should hold
 var player1HandValue = [];
 var player2HandValue = [];
 var player1HandSuit = [];
@@ -42,11 +49,12 @@ var player2HandSuit = [];
 
 var inOrder = [];
 
-var pot = 0;
+
 var totalBet = 0;
 var raiseAmount = 0;
 var turnNum = 1;
 
+//each players starts out with 1000 dollars to start the game
 var player1Money = 1000;
 var player2Money = 1000;
 
@@ -63,9 +71,6 @@ $player2Score.append(player2Money);
 var $prompt = $('#prompt');
 
 var $start = $('#start');
-var $river = $('#river');
-var $turn = $('#turn');
-
 
 
 var shuffle = function(){
@@ -171,6 +176,8 @@ console.log(inPlay);
 console.log(onTable);
 
 var startGame = function(){
+    $('#card4').css({'background-image': 'url("http://www.jimknapp.com/Cards/Bicycle_files/image160.jpg")'})
+    $('#card5').css({'background-image': 'url("http://www.jimknapp.com/Cards/Bicycle_files/image160.jpg")'})
     for (var i = 0; i < inPlay.length; i++){
         if(i === 0){
             $('#card1').css({'background-image': 'url(images/' + onTable[i].value + '_of_' + onTable[i].suit + '.png)'})
@@ -197,7 +204,6 @@ var turn = function(){
             $('#card4').css({'background-image': 'url(images/' + onTable[i].value + '_of_' + onTable[i].suit + '.png)'})
         }
     }
-    console.log('current bet is ' + currentBet + 'and pot is ' + pot);
     firstRound();
 }
 var river = function(){
@@ -206,25 +212,28 @@ var river = function(){
             $('#card5').css({'background-image': 'url(images/' + onTable[i].value + '_of_' + onTable[i].suit + '.png)'})
         }
     }
-    console.log('current bet is ' + currentBet + 'and pot is ' + pot);
     firstRound();
 }
 
 var firstRound = function(){
+    youLose();
+    player1Money = player1Money - 10;
+    player2Money = player2Money - 10;
+    pot += 20;
+    $pot.text("Total Pot: $" + pot);
+    $player1Score.text(player1Money);
+    $player2Score.text(player2Money);
+
     var $console = $('#console');
     if (turnNum === 1){
-        $prompt.text('First round of bets starts now! Player One, How much do you want to bet?');
+        $prompt.text('Both Players Ante Up 10$....First round of bets starts now! Player One, How much do you want to bet?');
 
         var $bet = $('#bet-submit');
         var $firstBetBox = $('#first-bet-box');
         $console.append($firstBetBox);
         $console.append($bet);
 
-
-
         $bet.on('click', firstRound2);
-
-
 
     }else if (turnNum === 2){
 
@@ -237,11 +246,7 @@ var firstRound = function(){
         var $firstBetInput = $firstBetBox.val();
         currentBet = parseInt($firstBetInput);
 
-        console.log('current bet is ' + currentBet + 'and pot is ' + pot);
-
-
         $bet.on('click', firstRound2);
-
 
     }else if (turnNum === 3){
 
@@ -254,8 +259,6 @@ var firstRound = function(){
 
         currentBet = parseInt($firstBetInput);
 
-        console.log('current bet is ' + currentBet + 'and pot is ' + pot);
-
         $bet.on('click', firstRound2);
 
 
@@ -263,6 +266,7 @@ var firstRound = function(){
 }
 
 var firstRound2 = function(){
+    youLose();
     var $betBox2 = $('#first-bet-box');
     var $console = $('#console');
     var $betInput2 = $betBox2.val();
@@ -309,14 +313,12 @@ var firstRound2 = function(){
     // var $fold = $('<button>').text("FOLD");
     // $prompt.append($fold);
 
-    console.log('current bet is ' + currentBet + 'and pot is ' + pot);
-
-
     // $call.on('click', player2Calls);
     // $raise.on('click', player2Raises);
     // $fold.on('click', player2Folds);
 }
 var player2Calls = function(){
+    youLose();
     if (turnNum === 1){
         var $potBox = $('#pot');
         var $player2Score = $('#player2Score');
@@ -335,10 +337,10 @@ var player2Calls = function(){
         var $player2Score = $('#player2Score');
         player2Money = player2Money - currentBet;
         $player2Score.text(player2Money);
-        $prompt.text('Player 2 calls... Now for the river...')
+        alert('Player 2 calls... Now for the river...')
         pot = pot + currentBet;
         var $potBox = $('#pot');
-        $pot.text("pot is at $" + pot);
+        $pot.text("Total Pot: $" + pot);
 
         turnNum++;
         console.log(turnNum);
@@ -349,9 +351,8 @@ var player2Calls = function(){
         $player2Score.text(player2Money);
         pot = pot + currentBet;
         var $potBox = $('#pot');
-        $pot.text("pot is at $" + pot);
-
-        console.log('current bet is ' + currentBet + 'and pot is ' + pot);
+        $pot.text("Total Pot: $" + pot);
+        alert('Player 2 calls... Lets see who won ...')
 
         setHands();
         checkPlayer1();
@@ -376,6 +377,7 @@ var player2Folds = function(){
 }
 var player2Raises = function(){
 
+    youLose();
     var $console = $('#console');
     var $bet = $('#bet-submit');
     var $betBox = $('#first-bet-box');
@@ -397,6 +399,7 @@ var player2Raises = function(){
     player1AfterRaise();
 }
 var player1AfterRaise = function(){
+    youLose();
     var $raiseInputBox = $('#raiseInputBox')
     var $raise = $raiseInputBox.val();
     raiseAmount = parseInt($raise);
@@ -417,7 +420,7 @@ var player1AfterRaise = function(){
 
     $player2Score.text(player2Money);
     var $potBox = $('#pot');
-    $pot.text("pot is at $" + pot);
+    $pot.text("Total Pot: $" + pot);
 
     console.log('current bet is ' + currentBet + 'and pot is ' + pot);
 
@@ -426,6 +429,7 @@ var player1AfterRaise = function(){
 }
 
 var player1Calls = function(){
+    youLose();
     console.log("turn number is " + turnNum);
     if (turnNum === 3){
         var $player1Score = $('#player1Score');
@@ -441,9 +445,7 @@ var player1Calls = function(){
 
         var $potBox = $('#pot');
         pot += 50;
-        $pot.text("pot is at $" + pot);
-
-        console.log('current bet is ' + currentBet + 'and pot is ' + pot);
+        $pot.text("Total Pot: $" + pot);
 
         setHands();
         checkPlayer1();
@@ -460,7 +462,7 @@ var player1Calls = function(){
         $prompt.text('Player 1 has called. Now for the river...');
         pot += 50;
         var $potBox = $('#pot');
-        $pot.text("pot is at $" + pot);
+        $pot.text("Total Pot: $" + pot);
         turnNum++;
         river();
     }else if (turnNum === 1) {
@@ -474,10 +476,8 @@ var player1Calls = function(){
         $prompt.text('Player 1 has called. Now for the turn...');
         pot += 50;
         var $potBox = $('#pot');
-        $pot.text("pot is at $" + pot);
+        $pot.text("Total Pot: $" + pot);
         turnNum++;
-
-        console.log('current bet is ' + currentBet + 'and pot is ' + pot);
         turn();
     }
 }
@@ -506,6 +506,7 @@ var setHands = function(){
 
 }
 var nextRound = function(){
+    youLose();
     inPlay.splice(0,inPlay.length);
     onTable.splice(0,onTable.length);
     player1HandValue.splice(0,player1HandValue.length);
@@ -531,6 +532,9 @@ var nextRound = function(){
     aiseAmount = 0;
     turnNum = 1;
 
+    player1Result = 0;
+    player2Result = 0;
+
 
     var $console = $('#console');
     console.log("removing play next round button");
@@ -540,13 +544,25 @@ var nextRound = function(){
     $console.append($firstBetBox);
     $console.append($bet);
 
-    $('#card4').css({'background-image': 'url("http://www.jimknapp.com/Cards/Bicycle_files/image160.jpg")'})
-    $('#card5').css({'background-image': 'url("http://www.jimknapp.com/Cards/Bicycle_files/image160.jpg")'})
+
     shuffle();
     findSuit();
     findValues();
+    $('#card4').css({'background-image': 'url("http://www.jimknapp.com/Cards/Bicycle_files/image160.jpg")'})
+    $('#card5').css({'background-image': 'url("http://www.jimknapp.com/Cards/Bicycle_files/image160.jpg")'})
     startGame();
 
+}
+var youLose = function(){
+    if(player1Money <= 0){
+        alert("Player 1 lost all their money and loses.")
+        alert("Computer wins!!!!")
+        location.reload();
+    }else if(player2Money <= 0){
+        alert("Player 2 lost all their money and loses.")
+        alert("Player 1 wins!!!!")
+        location.reload();
+    }
 }
 var checkPlayer1 = function(){
     player1HandValue.sort(function(a, b){return a-b});
@@ -581,6 +597,25 @@ var checkPlayer1 = function(){
             player1Result = 4;
         }
     }
+    //check for a full house
+    for(i = 0; i < player1HandValue.length; i++){
+        if(player1HandValue[i]=== player1HandValue[i+1] && player1HandValue[i] === player1HandValue[i+2]){
+            player1HandValue.splice(i,3);
+            for(i = 0; i < player1HandValue.length; i++){
+                if(player1HandValue[i]=== player1HandValue[i+1]){
+                    console.log("found a full house");
+                    player1Result = 5;
+                }
+            }
+        }
+    }
+    //check for a flush
+    for(i = 0; i < player1HandSuit.length; i++){
+        if(player1HandSuit[i] === player1HandSuit[i+1] && player1HandSuit[i] === player1HandSuit[i+2] && player1HandSuit[i] === player1HandSuit[i+3] && player1HandSuit[i] === player1HandSuit[i+4]){
+            console.log("found a flush");
+            player1Result = 6;
+        }
+    }
 }
 var checkPlayer2 = function(){
     player2HandValue.sort(function(a, b){return a-b});
@@ -608,15 +643,35 @@ var checkPlayer2 = function(){
         }
     }
     //check for a straight
-    for(i = 0; i < player1HandValue.length; i++){
+    for(i = 0; i < player2HandValue.length; i++){
         if(player2HandValue[i]+ 1 === player2HandValue[i+1] && player2HandValue[i]+2 === player2HandValue[i+2] && player2HandValue[i]+3 === player2HandValue[i+3] && player2HandValue[i]+4 === player2HandValue[i+4]){
             console.log("found a straight");
             player2Result = 4;
         }
     }
+    //check for a full house
+    for(i = 0; i < player2HandValue.length; i++){
+        if(player2HandValue[i]=== player2HandValue[i+1] && player2HandValue[i] === player2HandValue[i+2]){
+            player2HandValue.splice(i,3);
+            for(i = 0; i < player2HandValue.length; i++){
+                if(player2HandValue[i]=== player2HandValue[i+1]){
+                    console.log("found a full house");
+                    player2Result = 5;
+                }
+            }
+        }
+    }
+    //check for a flush
+    for(i = 0; i < player2HandSuit.length; i++){
+        if(player2HandSuit[i] === player2HandSuit[i+1] && player2HandSuit[i] === player2HandSuit[i+2] && player2HandSuit[i] === player2HandSuit[i+3] && player2HandSuit[i] === player2HandSuit[i+4]){
+            console.log("found a flush");
+            player2Result = 6;
+        }
+    }
 }
 
 var checkWinner = function(){
+    $pot.text("pot is at $0");
     for (var i = 0; i < inPlay.length; i++){
         if(i === 7){
             $('#player2Card1').css({'background-image': 'url(images/' + onTable[i].value + '_of_' + onTable[i].suit + '.png)'})
@@ -666,6 +721,20 @@ var checkWinner = function(){
         var $again = $('<button>').addClass('inputButton').text('Play Next Round');
         $console.append($again);
         $again.on('click', nextRound)
+    }else if(player1HandValue[6] > player2HandValue[6]){
+        $prompt.text('Player 1 has won the hand');
+        player1Money = player1Money + pot;
+        player1Score.text(player1Money);
+        var $again = $('<button>').addClass('inputButton').text('Play Next Round');
+        $console.append($again);
+        $again.on('click', nextRound)
+    }else if(player2HandValue[6] > player1HandValue[6]){
+        $prompt.text('Player 2 has won the hand');
+        player2Money = player2Money + pot;
+        $player2Score.text(player2Money);
+        var $again = $('<button>').addClass('inputButton').text('Play Next Round');
+        $console.append($again);
+        $again.on('click', nextRound)
     }else{
         console.log("Split the pot");
         $prompt.text('Split the pot');
@@ -693,7 +762,6 @@ shuffle();
 findSuit();
 findValues();
 $start.on('click', startGame)
-$turn.on('click', turn)
-$river.on('click', river)
+
 
 }); // end window onload
