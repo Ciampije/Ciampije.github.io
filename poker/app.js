@@ -72,7 +72,9 @@ var $prompt = $('#prompt');
 
 var $start = $('#start');
 
-
+//puts 9 random numbers into an array called inPlay
+//each number corresponds to a card in the deck
+//the nested for loop was to make sure no cards are repeating
 var shuffle = function(){
     var til = 9;
     for (var i = 0; i < til; i++){
@@ -89,7 +91,8 @@ var shuffle = function(){
     }
     inPlay.sort(function(a, b){return 0.5 - Math.random()});
 }
-
+// mods each number in the inPlay array to determine the suit
+//makes a key in the card object called suit
 var findSuit = function(){
     for (i = 0; i < inPlay.length; i++){
         var mod = inPlay[i]%4;
@@ -124,7 +127,8 @@ var findSuit = function(){
         }
     }
 }
-
+//gives each object a key called value which can be used to compare the cards and
+// a key called name which is used for the image of the card
 var findValues = function(){
     for (i = 0; i < inPlay.length; i++){
         var divide = inPlay[i]/4;
@@ -175,6 +179,7 @@ var findValues = function(){
 console.log(inPlay);
 console.log(onTable);
 
+//This sets the images of the flop cards, player 1 cards, and the computers cards
 var startGame = function(){
     $('#card4').css({'background-image': 'url("http://www.jimknapp.com/Cards/Bicycle_files/image160.jpg")'})
     $('#card5').css({'background-image': 'url("http://www.jimknapp.com/Cards/Bicycle_files/image160.jpg")'})
@@ -198,6 +203,7 @@ var startGame = function(){
 }
     firstRound();
 }
+//when called this sets the turn cards image
 var turn = function(){
     for (var i = 0; i < inPlay.length; i++){
         if(i === 3){
@@ -206,6 +212,7 @@ var turn = function(){
     }
     firstRound();
 }
+//when called this sets the river cards image
 var river = function(){
     for (var i = 0; i < inPlay.length; i++){
         if(i === 4){
@@ -215,10 +222,14 @@ var river = function(){
     firstRound();
 }
 
+//this is the first round which sets up the ante and ask the user how much
+//they would like to bet
 var firstRound = function(){
     youLose();
+    //each player loses 10 for the ante at the start of each round
     player1Money = player1Money - 10;
     player2Money = player2Money - 10;
+    //add the ante to the pot
     pot += 20;
     $pot.text("Total Pot: $" + pot);
     $player1Score.text(player1Money);
@@ -264,7 +275,8 @@ var firstRound = function(){
 
     }
 }
-
+//this function runs immediately after the user clicks on the amount of money
+//they want to bet
 var firstRound2 = function(){
     youLose();
     var $betBox2 = $('#first-bet-box');
@@ -295,6 +307,10 @@ var firstRound2 = function(){
     alert('Genius bot is determing its move');
     $prompt.append('<br>');
 
+    //computer chooses a random number to decide what it wants to do
+    //60% chance of calling
+    //20% chance of folding
+    //20% chance of raising
     var choice = Math.floor(Math.random() * (10 - 1)) + 1;
 
     console.log(choice);
@@ -317,6 +333,8 @@ var firstRound2 = function(){
     // $raise.on('click', player2Raises);
     // $fold.on('click', player2Folds);
 }
+
+//immediately runs if the computer calls
 var player2Calls = function(){
     youLose();
     if (turnNum === 1){
@@ -360,6 +378,7 @@ var player2Calls = function(){
         checkWinner();
     }
 }
+//player 1 automatically wins when the computer folds
 var player2Folds = function(){
     alert('Player 2 folds!!... Player One wins the hand!...');
     $prompt.text('Player One wins the pot!');
@@ -405,7 +424,6 @@ var player1AfterRaise = function(){
     raiseAmount = parseInt($raise);
 
     var $console = $('#console');
-    // pot += raiseAmount;
     currentBet += 50;
     pot += currentBet;
     $console.children().detach('#raiseInputBox');
@@ -428,6 +446,7 @@ var player1AfterRaise = function(){
     $fold.on('click', player1Folds);
 }
 
+//depending on which turn it is, either the turn or river is run next
 var player1Calls = function(){
     youLose();
     console.log("turn number is " + turnNum);
@@ -440,7 +459,7 @@ var player1Calls = function(){
         $player2Money = player2Money - 50;
         $player2Score.text(player2Money);
         setTimeout(function () {
-            $prompt.text('Player 1 has called. Now for the turn...');
+            $prompt.text('Player 1 has called...');
         }, 1000);
 
         var $potBox = $('#pot');
@@ -507,6 +526,7 @@ var setHands = function(){
 }
 var nextRound = function(){
     youLose();
+    // resets all the arrays so new cards can be set for the next round
     inPlay.splice(0,inPlay.length);
     onTable.splice(0,onTable.length);
     player1HandValue.splice(0,player1HandValue.length);
@@ -553,6 +573,8 @@ var nextRound = function(){
     startGame();
 
 }
+// is run and checked throughout the code to see if someone lost all their money
+//and loses
 var youLose = function(){
     if(player1Money <= 0){
         alert("Player 1 lost all their money and loses.")
@@ -564,6 +586,8 @@ var youLose = function(){
         location.reload();
     }
 }
+
+//evaluates player 1s hand
 var checkPlayer1 = function(){
     player1HandValue.sort(function(a, b){return a-b});
     player1HandSuit.sort();
@@ -617,6 +641,7 @@ var checkPlayer1 = function(){
         }
     }
 }
+//evaluates player 2s hand
 var checkPlayer2 = function(){
     player2HandValue.sort(function(a, b){return a-b});
     player2HandSuit.sort();
@@ -669,7 +694,7 @@ var checkPlayer2 = function(){
         }
     }
 }
-
+//compares the results of both player to see the winner
 var checkWinner = function(){
     $pot.text("pot is at $0");
     for (var i = 0; i < inPlay.length; i++){
